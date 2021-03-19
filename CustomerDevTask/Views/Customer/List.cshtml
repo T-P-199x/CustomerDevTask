@@ -1,0 +1,54 @@
+﻿@model CustomerDevTask.Web.Models.CustomersViewModel
+@{
+    ViewData["Title"] = "Customers";
+}
+
+<h1>Customers</h1>
+<div>
+    @Html.ActionLink("Add New Customer", "Add", "Customer", null, new { @class = "btn btn-secondary" })
+</div>
+<hr />
+<div class="row"></div>
+<div>
+    <table class="table" id="customersTable">
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Telephone Number
+            </th>
+            <th>
+                Date of Birth
+            </th>
+            <th>
+                Age
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+        @foreach (var customer in Model.Customers)
+        {
+            <tr>
+                <td>
+                    @customer.DisplayName
+                </td>
+                <td>
+                    @customer.TelephoneNumber
+                </td>
+                <td>
+                    @Html.DisplayFor(x => customer.DateOfBirth)
+                </td>
+                <td>
+                    @customer.Age
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "Customer", new { id = customer.Id }, new { @class = "btn btn-secondary" })
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+

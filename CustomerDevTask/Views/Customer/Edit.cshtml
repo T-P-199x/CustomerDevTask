@@ -1,0 +1,15 @@
+﻿@model CustomerDevTask.Web.Models.EditableCustomerViewModel
+@{
+    ViewData["Title"] = "Edit Customer";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Edit Customer</h4>
+    <hr />
+    <partial name="_CustomerDetails" mdoel="model" />
+</div>
+}

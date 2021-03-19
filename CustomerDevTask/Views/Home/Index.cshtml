@@ -1,8 +1,12 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Customer List";
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <p>This application was created by Toby Prince, for Shield Safety Group.</p>
+    <br />
+    <p>To see a list of Customers, please select 'Customers' from the menu above, or click the button below:</p>
+    <br />
+    @Html.ActionLink("View Customers", "List", "Customer", null, new { @class = "btn btn-secondary" })
 </div>

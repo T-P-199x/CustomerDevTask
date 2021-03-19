@@ -1,13 +1,10 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using CustomerDevTask.SqlRepository.Customer;
+using CustomerDevTask.Service.Customer;
 
 namespace CustomerDevTask
 {
@@ -24,6 +21,9 @@ namespace CustomerDevTask
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.Configure<Models.AppSetting>(Configuration.GetSection("ApplicationSettings"));
+            services.AddTransient<ICustomerRepository>(x => new CustomerRepository(Configuration.GetConnectionString("CustomerDevTaskDb")));
+            services.AddScoped<ICustomerService, CustomerService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
