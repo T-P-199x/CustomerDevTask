@@ -9,3 +9,4 @@ When ready to deploy run `LOCAL.DBDeployment.bat`.
 
 - Redirect to the edit screen when a customer is saved rather than disabling the button. 
 - A more friendly telephone validator, rather than just allowing numeric only phone numbers.
+- Pagination for customer list
