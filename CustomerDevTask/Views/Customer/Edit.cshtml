@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "Edit Customer";
 }
-@if (!@Model.Success)
+@if (@Model.IsSaved.HasValue && !Model.IsSaved.Value)
 {
     <div class="alert alert-danger">
         <strong>Error retrieving customer record.</strong>
