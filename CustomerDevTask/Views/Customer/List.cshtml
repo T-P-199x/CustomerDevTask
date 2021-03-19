@@ -10,8 +10,6 @@
 
         for (i = 0; i < rows.length; i++) {
             var name = rows[i].cells[0].innerText;
-            var nameExists = checkNameExists(name, namesAndColours);
-            var nameIndex = checkNameExists(name, namesAndColours);
 
             if (checkNameExists(name, namesAndColours) == -1) {
                 var obj = {}
