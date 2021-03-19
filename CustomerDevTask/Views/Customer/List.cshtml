@@ -2,6 +2,68 @@
 @{
     ViewData["Title"] = "Customers";
 }
+@section Scripts
+{
+    <script type="text/javascript">
+        var rows = $('tr').not('thead tr').addClass('selected');
+        var namesAndColours = new Array();
+
+        for (i = 0; i < rows.length; i++) {
+            var name = rows[i].cells[0].innerText;
+            var nameExists = checkNameExists(name, namesAndColours);
+            var nameIndex = checkNameExists(name, namesAndColours);
+
+            if (checkNameExists(name, namesAndColours) == -1) {
+                var obj = {}
+                obj["name"] = name;
+
+                var colour = generateRedGreenBlue();
+
+                while (checkColourExists(colour.concat, namesAndColours) != -1) {
+                    colour = generateRedGreenBlue();
+                }
+
+                obj["colour"] = colour;
+                obj["concatColour"] = colour.concat;
+
+                namesAndColours.push(obj);
+
+                rows[i].style.background = "rgb(" + colour.red + "," + colour.green + "," + colour.blue + ")";
+            } else {
+                var colour = getColourByName(name, namesAndColours);
+                rows[i].style.background = "rgb(" + colour.red + "," + colour.green + "," + colour.blue + ")";
+            }
+        }
+
+        function getColourByName(name, array) {
+            var entry = array.filter(function (x) { return x.name == name });
+            return entry[0].colour;
+        }
+
+        function checkNameExists(name, array) {
+            var loggedNames = array.map(a => a.name);
+            return loggedNames.indexOf(name);
+        }
+
+        function checkColourExists(concatenatedColour, array) {
+            var loggedColours = array.map(a => a.concat);
+            return loggedColours.indexOf(concatenatedColour);
+        }
+
+        function generateRedGreenBlue() {
+            var red = Math.random() * 255;
+            var green = Math.random() * 255;
+            var blue = Math.random() * 255;
+
+            var obj = {}
+            obj["red"] = red;
+            obj["green"] = green;
+            obj["blue"] = blue;
+            obj["concat"] = "" + red + green + blue;
+            return obj;
+        }
+    </script>
+}
 
 <h1>Customers</h1>
 <div>
@@ -11,43 +73,47 @@
 <div class="row"></div>
 <div>
     <table class="table" id="customersTable">
-        <tr>
-            <th>
-                Name
-            </th>
-            <th>
-                Telephone Number
-            </th>
-            <th>
-                Date of Birth
-            </th>
-            <th>
-                Age
-            </th>
-            <th>
-                Actions
-            </th>
-        </tr>
-        @foreach (var customer in Model.Customers)
-        {
-            <tr>
-                <td>
-                    @customer.DisplayName
-                </td>
-                <td>
-                    @customer.TelephoneNumber
-                </td>
-                <td>
-                    @Html.DisplayFor(x => customer.DateOfBirth)
-                </td>
-                <td>
-                    @customer.Age
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", "Customer", new { id = customer.Id }, new { @class = "btn btn-secondary" })
-                </td>
+        <thead>
+            <tr id="header">
+                <th>
+                    Name
+                </th>
+                <th>
+                    Telephone Number
+                </th>
+                <th>
+                    Date of Birth
+                </th>
+                <th>
+                    Age
+                </th>
+                <th>
+                    Actions
+                </th>
             </tr>
-        }
+        </thead>
+        <tbody>
+            @foreach (var customer in Model.Customers)
+            {
+                <tr>
+                    <td>
+                        @customer.DisplayName
+                    </td>
+                    <td>
+                        @customer.TelephoneNumber
+                    </td>
+                    <td>
+                        @Html.DisplayFor(x => customer.DateOfBirth)
+                    </td>
+                    <td>
+                        @customer.Age
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", "Customer", new { id = customer.Id }, new { @class = "btn btn-secondary" })
+                    </td>
+                </tr>
+            }
+        </tbody>
     </table>
 </div>
 
