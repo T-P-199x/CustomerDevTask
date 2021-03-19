@@ -7,19 +7,19 @@ namespace CustomerDevTask.Service.Customer
 {
     public class CustomerService : ICustomerService
     {
-        private ICustomerRepository _customerRepository;
+        private readonly ICustomerRepository _customerRepository;
 
         public CustomerService(ICustomerRepository customerRepository)
         {
             _customerRepository = customerRepository;
         }
 
-        public async Task<IEnumerable<Models.Customer.Customer>> GetAll()
+        public async Task<(bool, IEnumerable<Models.Customer.Customer>)> GetAll()
         {
             return await _customerRepository.GetAll().ConfigureAwait(false);
         }
 
-        public async Task<Models.Customer.Customer> Get(int Id)
+        public async Task<(bool, Models.Customer.Customer)> Get(int Id)
         {
             return await _customerRepository.Get(Id).ConfigureAwait(false);
         }

@@ -6,5 +6,7 @@ namespace CustomerDevTask.Web.Models
     public class CustomersViewModel
     {
         public IEnumerable<Customer> Customers { get; set; }
+
+        public bool Success { get; set; }
     }
 }

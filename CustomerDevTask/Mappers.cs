@@ -20,6 +20,11 @@ namespace CustomerDevTask.Web
 
         public static EditableCustomerViewModel Map(Customer value)
         {
+            if(value == null)
+            {
+                return new EditableCustomerViewModel();
+            }
+
             return new EditableCustomerViewModel
             {
                 FirstName = value.FirstName,
@@ -31,6 +36,11 @@ namespace CustomerDevTask.Web
 
         public static CustomersViewModel Map(IEnumerable<Customer> value)
         {
+            if(value == null)
+            {
+                return new CustomersViewModel();
+            }
+
             return new CustomersViewModel
             {
                 Customers = value,

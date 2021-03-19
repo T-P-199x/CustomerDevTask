@@ -17,9 +17,11 @@ namespace CustomerDevTask.Controllers
 
         public async Task<IActionResult> List()
         {
-            var customers = await _customerService.GetAll().ConfigureAwait(false);
+            var (success, customers) = await _customerService.GetAll().ConfigureAwait(false);
 
             var viewModel = Mappers.Map(customers);
+
+            viewModel.Success = success;
 
             return View(viewModel);
         }
@@ -27,9 +29,10 @@ namespace CustomerDevTask.Controllers
         [HttpGet]
         public async Task<ActionResult> Edit(int id)
         {
-            var customer = await _customerService.Get(id).ConfigureAwait(false);
+            var (sucess, customer) = await _customerService.Get(id).ConfigureAwait(false);
 
             var viewModel = Mappers.Map(customer);
+            viewModel.Success = sucess;
 
             return View(viewModel);
         }

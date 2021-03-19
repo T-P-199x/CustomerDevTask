@@ -5,9 +5,9 @@ namespace CustomerDevTask.Service.Customer
 { 
     public interface ICustomerService
     {
-        Task<IEnumerable<Models.Customer.Customer>> GetAll();
+        Task<(bool, IEnumerable<Models.Customer.Customer>)> GetAll();
 
-        Task<Models.Customer.Customer> Get(int Id);
+        Task<(bool, Models.Customer.Customer)> Get(int Id);
 
         Task<bool> Update(Models.Customer.Customer customer);
 

@@ -15,38 +15,52 @@ namespace CustomerDevTask.SqlRepository.Customer
             _connectionString = connectionString;
         }
 
-        public async Task<IEnumerable<Models.Customer.Customer>> GetAll()
+        public async Task<(bool, IEnumerable<Models.Customer.Customer>)> GetAll()
         {
             IEnumerable<Models.Customer.Customer> customers = null;
 
-            using (var connection = new SqlConnection(_connectionString))
+            try
             {
-                customers = await connection.QueryAsync<Models.Customer.Customer>(
-                    "[dbo].[Customer_GetAll]",
-                    commandType: CommandType.StoredProcedure)
-                    .ConfigureAwait(false);
+                using (var connection = new SqlConnection(_connectionString))
+                {
+                    customers = await connection.QueryAsync<Models.Customer.Customer>(
+                        "[dbo].[Customer_GetAll]",
+                        commandType: CommandType.StoredProcedure)
+                        .ConfigureAwait(false);
+                }
+            }
+            catch
+            {
+                return (false, null);
             }
 
-            return customers;
+            return (true, customers);
         }
 
-        public async Task<Models.Customer.Customer> Get(int Id)
+        public async Task<(bool, Models.Customer.Customer)> Get(int Id)
         {
             Models.Customer.Customer customer = null;
 
             var parameters = new DynamicParameters();
             parameters.Add("@CustomerId", Id, DbType.Int32, ParameterDirection.Input);
 
-            using (var connection = new SqlConnection(_connectionString))
+            try
             {
-                customer = await connection.QuerySingleAsync<Models.Customer.Customer>(
-                    "[dbo].[Customer_GetById]",
-                    parameters,
-                    commandType: CommandType.StoredProcedure)
-                    .ConfigureAwait(false);
+                using (var connection = new SqlConnection(_connectionString))
+                {
+                    customer = await connection.QuerySingleAsync<Models.Customer.Customer>(
+                        "[dbo].[Customer_GetById]",
+                        parameters,
+                        commandType: CommandType.StoredProcedure)
+                        .ConfigureAwait(false);
+                }
+            }
+            catch
+            {
+                return (false, null);
             }
 
-            return customer;
+            return (true, customer);
         }
 
         public async Task<bool> Save(Models.Customer.Customer customer, SaveType saveType)

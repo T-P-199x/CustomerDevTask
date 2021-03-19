@@ -21,5 +21,7 @@ namespace CustomerDevTask.Web.Models
         public string TelephoneNumber { get; set; }
 
         public bool? IsSaved { get; set; }
+
+        public bool Success { get; set; }
     }
 }

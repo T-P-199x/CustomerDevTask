@@ -2,14 +2,22 @@
 @{
     ViewData["Title"] = "Edit Customer";
 }
-
-@using (Html.BeginForm())
+@if (!@Model.Success)
 {
-    @Html.AntiForgeryToken()
+    <div class="alert alert-danger">
+        <strong>Error retrieving customer record.</strong>
+    </div>
+}
+else
+{
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <h4>Edit Customer</h4>
-    <hr />
-    <partial name="_CustomerDetails" mdoel="model" />
-</div>
+        <div class="form-horizontal">
+            <h4>Edit Customer</h4>
+            <hr />
+            <partial name="_CustomerDetails" mdoel="model" />
+        </div>
+    }
 }
