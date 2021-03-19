@@ -2,11 +2,11 @@
 @{ 
     var buttonText = "Cancel";
     var buttonClass = "btn btn-danger";
+
     if(Model.IsSaved.HasValue && Model.IsSaved.Value)
     {
         buttonText = "Back";
         buttonClass = "btn btn-secondary";
-
     }
 }
 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -68,7 +68,10 @@
 
 <div class="form-group">
     <div class="col-md-offset-2 col-md-10">
-        <input type="submit" value="Save" class="btn btn-success" />
+        @if (!Model.IsSaved.HasValue)
+        {
+            <input type="submit" value="Save" class="btn btn-success" />
+        }
         @Html.ActionLink(buttonText, "List", "Customer", null, new { @class = buttonClass })
     </div>
 </div>
