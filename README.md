@@ -15,7 +15,7 @@ You can change the name of the database in the `.bat` file:
 SET database.name="CustomerDevTask"
 ```
 
-If the database name is chamged, then the `app.settings` file must be updated to reflect the database name change.
+If the database name is chamged, then the `appsettings.json` file must be updated to reflect the database name change.
 
 When ready to deploy run `LOCAL.DBDeployment.bat`.
 
