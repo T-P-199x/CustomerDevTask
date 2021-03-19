@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+using System.Linq;
 
 namespace CustomerDevTask.Web
 {
@@ -11,7 +12,9 @@ namespace CustomerDevTask.Web
                 return false;
             }
 
+            number = string.Concat(number.Where(x => !char.IsWhiteSpace(x)));
             var regex = new Regex("^[0-9]+$");
+
             return regex.IsMatch(number);
         }
     }
