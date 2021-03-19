@@ -1,0 +1,9 @@
+CREATE TABLE [Telephone]
+(
+	[ID]  INT NOT NULL IDENTITY(1,1)
+		PRIMARY KEY CLUSTERED,
+	[CustomerId] INT NOT NULL
+		FOREIGN KEY REFERENCES [Customer]([ID])
+		CONSTRAINT UC_CustomerId UNIQUE([CustomerId]),
+	[Number] VARCHAR(255) NOT NULL
+);
