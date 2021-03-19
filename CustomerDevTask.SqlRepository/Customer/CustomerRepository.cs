@@ -81,7 +81,7 @@ namespace CustomerDevTask.SqlRepository.Customer
                         .ConfigureAwait(false);
                 }
             }
-            catch (SqlException ex)
+            catch
             {
                 return false;
             }
