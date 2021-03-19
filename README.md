@@ -7,7 +7,15 @@ To use [RoundhousE](https://github.com/chucknorris/roundhouse) to deploy the dat
 SET server.database="[SqlServer\Instance]"
 ```
 
-The database it will create is named `CustomerDevTask`, ensure that there is no database named that before running the first time, or it will amend that database. 
+The database it will create is named `CustomerDevTask`, ensure that there is no database with the same name before running for the first time, or it will amend that database.
+
+You can change the name of the database in the `.bat` file:
+
+```
+SET database.name="CustomerDevTask"
+```
+
+If the database name is chamged, then the `app.settings` file must be updated to reflect the database name change.
 
 When ready to deploy run `LOCAL.DBDeployment.bat`.
 
