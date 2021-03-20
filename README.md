@@ -17,7 +17,7 @@ You can change the name of the database in the `.bat` file:
 SET database.name="CustomerDevTask"
 ```
 
-If the database name is chamged, then the `appsettings.json` file must be updated to reflect the database name change (see below).
+If the database name is changed, then the `appsettings.json` file must be updated to reflect the database name change (see below).
 
 When ready to deploy run `LOCAL.DBDeployment.bat`.
 
@@ -32,4 +32,5 @@ Amend `appsettings.json` to point at your SQL instance:
 
 - Redirect to the edit screen when a customer is saved rather than disabling the button. 
 - A more friendly telephone validator, rather than just allowing numeric only phone numbers.
-- Pagination for customer list
+- Pagination for customer list.
+- Age calculation does not account for leap years.
